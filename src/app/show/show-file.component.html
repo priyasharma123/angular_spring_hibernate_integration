@@ -1,0 +1,8 @@
+<table>
+  <tr *ngFor="let data of imageMessage">
+      <td><img width="300" alt="Angular Logo" src="data:image/jpeg;base64,{{data.image}}">
+        <p>{{data.message}}</p>
+      </td>
+  </tr>
+
+</table>
