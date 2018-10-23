@@ -1,8 +1,7 @@
-<table>
-  <tr *ngFor="let data of imageMessage">
-      <td><img width="300" alt="Angular Logo" src="data:image/jpeg;base64,{{data.image}}">
-        <p>{{data.message}}</p>
-      </td>
-  </tr>
-
-</table>
+<body>
+  <div id="background"> 
+    <div [@popOverState] = "stateName" #display  align="middle" id="imageWrap"><img (mouseover)="stopTimer()" (mouseout)="startTimer()" width="500px" height="500px" alt="Angular Logo" src="data:image/jpeg;base64,{{image}}">
+        <p>{{message}}</p>
+   </div>
+  </div>
+</body>

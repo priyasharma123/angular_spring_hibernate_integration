@@ -1,29 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { UploadFileServiceService } from 'src/app/upload-file-service.service';
-import { HttpResponse } from '@angular/common/http';
-
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms'
+import { UploadFileServiceService } from '../../upload-file-service.service';
 @Component({
-  selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.css']
 })
-export class UploadFileComponent implements OnInit {
+export class UploadFileComponent {
+ 
+  @ViewChild('imageUpload') imageUpload;
+  
+  constructor(private fb : FormBuilder, private uploadService : UploadFileServiceService){}
 
-  selectedFile: File = null;
-  currentSelectedFile: File;
-
-  constructor(private uploadFileService: UploadFileServiceService) { }
-  selectFile(files: FileList) {
-    this.selectedFile = files.item(0);
-  }
-
-  ngOnInit() {
-  }
-
-  upload() {
-    console.log(this.currentSelectedFile);
-    this.uploadFileService.pushFileToStorage(this.currentSelectedFile).subscribe(
-      success => { console.log(success); }
+  imageFile : File;
+  msgNImage = this.fb.group({
+    message : [''],
+    image : [null]
+  })
+  
+  onSubmit(){
+    const Image = this.imageUpload.nativeElement;
+    if(Image.files && Image.files[0]){
+      this.imageFile = Image.files[0]
+    }
+    console.log(this.msgNImage.get('message').value)
+    this.uploadService.pushFileToStorage(this.imageFile,this.msgNImage.get('message').value).subscribe(
+      res => {console.log(res)}
     );
   }
 

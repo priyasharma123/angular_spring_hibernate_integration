@@ -1,7 +1,12 @@
-<p>
-  upload-file works!
-</p>
+<form [formGroup]="msgNImage" (ngSubmit)="onSubmit()">
+  Message <br>
+  <input type="text" formControlName="message">
+  <br>
+  Photo
+  <br>
+  <input type="file" #imageUpload formControlName="image"/>
 
+  <br>
 
-<input type="file" id="file" (change)="selectFile($event.target.files)"/>
-<button (click)="upload()">Upload</button>
+  <button type="submit">Upload</button>
+</form>
